@@ -51,4 +51,20 @@ class ScoreBoardTest {
         assertEquals(1, scoreBoard.getGames().size());
         assertEquals("Spain", scoreBoard.getGames().get(0).getHomeTeam());
     }
+
+    @Test
+    void shouldUpdateScore() {
+        scoreBoard.startGame("Mexico", "Canada");
+        scoreBoard.updateScore("Mexico", "Canada", 0, 5);
+        Game game = scoreBoard.getGames().get(0);
+        assertEquals(0, game.getHomeScore());
+        assertEquals(5, game.getAwayScore());
+    }
+
+    @Test
+    void shouldThrowExceptionWhenUpdatingNonExistentGame() {
+        assertThrows(IllegalArgumentException.class, () ->
+                scoreBoard.updateScore("Mexico", "Canada", 0, 5)
+        );
+    }
 }
