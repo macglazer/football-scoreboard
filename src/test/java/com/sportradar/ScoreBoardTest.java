@@ -3,6 +3,8 @@ package com.sportradar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScoreBoardTest {
@@ -66,5 +68,27 @@ class ScoreBoardTest {
         assertThrows(IllegalArgumentException.class, () ->
                 scoreBoard.updateScore("Mexico", "Canada", 0, 5)
         );
+    }
+
+    @Test
+    void shouldReturnSummaryOrderedByTotalScore() {
+        scoreBoard.startGame("Mexico", "Canada");
+        scoreBoard.updateScore("Mexico", "Canada", 0, 5);
+        scoreBoard.startGame("Spain", "Brazil");
+        scoreBoard.updateScore("Spain", "Brazil", 10, 2);
+        scoreBoard.startGame("Germany", "France");
+        scoreBoard.updateScore("Germany", "France", 2, 2);
+        scoreBoard.startGame("Uruguay", "Italy");
+        scoreBoard.updateScore("Uruguay", "Italy", 6, 6);
+        scoreBoard.startGame("Argentina", "Australia");
+        scoreBoard.updateScore("Argentina", "Australia", 3, 1);
+
+        List<Game> summary = scoreBoard.getSummary();
+
+        assertEquals("Uruguay", summary.get(0).getHomeTeam());
+        assertEquals("Spain", summary.get(1).getHomeTeam());
+        assertEquals("Mexico", summary.get(2).getHomeTeam());
+        assertEquals("Argentina", summary.get(3).getHomeTeam());
+        assertEquals("Germany", summary.get(4).getHomeTeam());
     }
 }
