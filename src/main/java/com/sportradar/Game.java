@@ -6,12 +6,14 @@ public class Game {
     private final String awayTeam;
     private int homeScore;
     private int awayScore;
+    private final long startTime;
 
     public Game(String homeTeam, String awayTeam, int homeScore, int awayScore) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = homeScore;
         this.awayScore = awayScore;
+        this.startTime = System.nanoTime();
     }
 
     public String getHomeTeam() {
@@ -36,5 +38,9 @@ public class Game {
 
     public void setAwayScore(int awayScore) {
         this.awayScore = awayScore;
+    }
+
+    public long getStartTime() {
+        return startTime;
     }
 }

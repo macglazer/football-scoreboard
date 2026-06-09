@@ -1,9 +1,11 @@
 package com.sportradar;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
 public class ScoreBoard {
 
@@ -28,5 +30,13 @@ public class ScoreBoard {
         }
         game.setHomeScore(homeScore);
         game.setAwayScore(awayScore);
+    }
+
+    public List<Game> getSummary() {
+        return games.values().stream()
+                .sorted(Comparator.comparingInt((Game g) -> g.getHomeScore() + g.getAwayScore())
+                        .reversed()
+                        .thenComparing(Comparator.comparingLong(Game::getStartTime).reversed()))
+                .collect(Collectors.toList());
     }
 }
