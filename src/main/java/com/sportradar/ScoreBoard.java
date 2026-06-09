@@ -20,4 +20,13 @@ public class ScoreBoard {
     public void finishGame(String homeTeam, String awayTeam) {
         games.remove(homeTeam + awayTeam);
     }
+
+    public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+        Game game = games.get(homeTeam + awayTeam);
+        if (game == null) {
+            throw new IllegalArgumentException("Game not found");
+        }
+        game.setHomeScore(homeScore);
+        game.setAwayScore(awayScore);
+    }
 }
