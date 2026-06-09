@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.sportradar.ScoreBoardTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 s -- in com.sportradar.ScoreBoardTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 s -- in com.sportradar.ScoreBoardTest

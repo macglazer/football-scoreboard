@@ -35,4 +35,20 @@ class ScoreBoardTest {
         assertEquals("Mexico", game.getHomeTeam());
         assertEquals("Canada", game.getAwayTeam());
     }
+
+    @Test
+    void shouldRemoveGameFromScoreBoard() {
+        scoreBoard.startGame("Mexico", "Canada");
+        scoreBoard.finishGame("Mexico", "Canada");
+        assertEquals(0, scoreBoard.getGames().size());
+    }
+
+    @Test
+    void shouldRemoveCorrectGame() {
+        scoreBoard.startGame("Mexico", "Canada");
+        scoreBoard.startGame("Spain", "Brazil");
+        scoreBoard.finishGame("Mexico", "Canada");
+        assertEquals(1, scoreBoard.getGames().size());
+        assertEquals("Spain", scoreBoard.getGames().get(0).getHomeTeam());
+    }
 }

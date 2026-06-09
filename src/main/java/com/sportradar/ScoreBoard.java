@@ -16,4 +16,8 @@ public class ScoreBoard {
     public List<Game> getGames() {
         return new ArrayList<>(games.values());
     }
+
+    public void finishGame(String homeTeam, String awayTeam) {
+        games.remove(homeTeam + awayTeam);
+    }
 }
