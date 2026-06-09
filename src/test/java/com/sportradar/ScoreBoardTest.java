@@ -91,4 +91,20 @@ class ScoreBoardTest {
         assertEquals("Argentina", summary.get(3).getHomeTeam());
         assertEquals("Germany", summary.get(4).getHomeTeam());
     }
+
+    @Test
+    void shouldThrowExceptionWhenTeamAlreadyPlaying() {
+        scoreBoard.startGame("Mexico", "Canada");
+        assertThrows(IllegalArgumentException.class, () ->
+                scoreBoard.startGame("Mexico", "Brazil")
+        );
+    }
+
+    @Test
+    void shouldThrowExceptionWhenScoreIsNegative() {
+        scoreBoard.startGame("Mexico", "Canada");
+        assertThrows(IllegalArgumentException.class, () ->
+                scoreBoard.updateScore("Mexico", "Canada", -1, 0)
+        );
+    }
 }
