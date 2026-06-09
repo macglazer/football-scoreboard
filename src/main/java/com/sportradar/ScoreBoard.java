@@ -12,6 +12,14 @@ public class ScoreBoard {
     private final Map<String, Game> games = new LinkedHashMap<>();
 
     public void startGame(String homeTeam, String awayTeam) {
+        boolean teamAlreadyPlaying = games.values().stream()
+                .anyMatch(g -> g.getHomeTeam().equals(homeTeam)
+                        || g.getAwayTeam().equals(homeTeam)
+                        || g.getHomeTeam().equals(awayTeam)
+                        || g.getAwayTeam().equals(awayTeam));
+        if (teamAlreadyPlaying) {
+            throw new IllegalArgumentException("Team is already playing");
+        }
         games.put(homeTeam + awayTeam, new Game(homeTeam, awayTeam, 0, 0));
     }
 
@@ -24,6 +32,10 @@ public class ScoreBoard {
     }
 
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+        if (homeScore < 0 || awayScore < 0) {
+            throw new IllegalArgumentException("Score cannot be negative");
+        }
+
         Game game = games.get(homeTeam + awayTeam);
         if (game == null) {
             throw new IllegalArgumentException("Game not found");
